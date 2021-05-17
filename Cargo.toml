@@ -1,0 +1,18 @@
+[package]
+name = "cargo"
+version = "0.1.0"
+authors = ["Aaron Weisberg <aaronweisberg@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jsonwebtoken = "7.2.0"
+serde = {version = "1.0", features = ["derive"] }
+proxy-wasm = "0.1.3"
+log = "0.4.8"
+anyhow = "1.0.31"
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
