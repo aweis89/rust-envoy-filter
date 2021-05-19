@@ -1,0 +1,55 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: jwt-auth
+spec:
+  configPatches:
+  - applyTo: HTTP_FILTER
+    match:
+      context: ANY
+      listener:
+        filterChain:
+          filter:
+            name: envoy.filters.network.http_connection_manager
+            subFilter:
+              name: envoy.filters.http.router
+    patch:
+      operation: INSERT_BEFORE
+      value:
+        name: envoy.wasm.skillz
+        typed_config:
+          '@type': type.googleapis.com/udpa.type.v1.TypedStruct
+          type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+          value:
+            config:
+              configuration:
+                '@type': type.googleapis.com/google.protobuf.StringValue
+                value: |
+                  pub_keys:
+                    - |
+                       -----BEGIN PUBLIC KEY-----
+                       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu7fsv42vLLVA18tul5IG
+                       y3fQwGT7esQovOrf337bQZ2Msj3p9I2lVRgiec+kSGikhwvjHGBBDD463TZlI135
+                       NFKDdNvaAcwMHx2sPaELWTBdWBUzK+lm3TLD+4Jsm12RrGc3iuVZW9pBPsIoxOzl
+                       3eiTYfhShcQONHEZrar/0takXQenG0v+8AQ5ziMUydro/4KZ7dBSvqi+So2EXifH
+                       yymWUuQ/S3B7GNCpwbjOHu8jXGAVeH2JpS6iooTD8QUWYZiqXxpm7wmuVgSSla7I
+                       uiAsSRpHh6Hr+U3GTpW7ZdKDJrXpAQMm5FxS7N/fuqkHfVWYIM1dAU6SFwISfJCh
+                       ZwIDAQAB
+                       -----END PUBLIC KEY-----
+                    - |
+                      -----BEGIN PUBLIC KEY-----
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz4hMWjr8/lbRQk2uMcRR
+                      5INxTodPVE6fdONxrrR0lgcr3MquE9pjTkQguGM2c4yMjE7gi1Eb9hrWZIOn+LM/
+                      Ml5t6tR/W0jNYnhYsbElRQdUJODYld7ecSeT30wGH9ys075vKC9O4tqZFQTvxI7+
+                      MVNjtjo/H2EBMmj/P7LmWJq5QIqTerXq9xbpUHmsRluPfi7FDjgweFrYuEXTislJ
+                      D74B2q3IvOn3dSIE6LELmkqHv5b3V2syAgza2RJSEHOgODwtfFBlZOYbFqV/VRlf
+                      jeVb5uW22/vNY/isROEI8Pb3WOceuKwtvOK9wdcVnwYqiKUbfL35ckqBdod6Shlp
+                      4wIDAQAB
+                      -----END PUBLIC KEY-----
+              vm_config:
+                allow_precompiled: true
+                code:
+                  local:
+                    filename: /var/local/lib/wasm-filters/filter.wasm
+                runtime: envoy.wasm.runtime.v8
+                vm_id: basic-auth
