@@ -26,6 +26,13 @@ struct JwtHandler {
     pub_keys: Option<Vec<String>>,
 }
 
+#[derive(Serialize, Deserialize, Clone)]
+struct SkillzJwtClaim<'a> {
+    sub: &'a str,
+    name: &'a str,
+    admin: bool,
+}
+
 impl RootContext for JwtHandler {
     fn on_configure(&mut self, _plugin_configuration_size: usize) -> bool {
         let config = self
@@ -103,7 +110,6 @@ const BEARER: &str = "Bearer ";
 
 impl JwtHandler {
     fn jwt_from_header(&self) -> Result<JWTClaims<NoCustomClaims>, Error> {
-        //self.extract_header()
         let jwt = self.extract_header()?;
         match jwt::parse_multiple(&jwt[..], self.pub_keys.clone().unwrap()) {
             Ok(jwt) => return Ok(jwt),
@@ -116,7 +122,7 @@ impl JwtHandler {
             Some(h) => h,
             None => return Err(Error::NoAuthHeaderError),
         };
-        let auth_header = match std::str::from_utf8(header.as_bytes()) {
+        let auth_header = match str::from_utf8(header.as_bytes()) {
             Ok(v) => v,
             Err(_) => return Err(Error::NoAuthHeaderError),
         };

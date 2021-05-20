@@ -37,15 +37,15 @@ spec:
                        ZwIDAQAB
                        -----END PUBLIC KEY-----
                     - |
-                      -----BEGIN PUBLIC KEY-----
-                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz4hMWjr8/lbRQk2uMcRR
-                      5INxTodPVE6fdONxrrR0lgcr3MquE9pjTkQguGM2c4yMjE7gi1Eb9hrWZIOn+LM/
-                      Ml5t6tR/W0jNYnhYsbElRQdUJODYld7ecSeT30wGH9ys075vKC9O4tqZFQTvxI7+
-                      MVNjtjo/H2EBMmj/P7LmWJq5QIqTerXq9xbpUHmsRluPfi7FDjgweFrYuEXTislJ
-                      D74B2q3IvOn3dSIE6LELmkqHv5b3V2syAgza2RJSEHOgODwtfFBlZOYbFqV/VRlf
-                      jeVb5uW22/vNY/isROEI8Pb3WOceuKwtvOK9wdcVnwYqiKUbfL35ckqBdod6Shlp
-                      4wIDAQAB
-                      -----END PUBLIC KEY-----
+                       -----BEGIN PUBLIC KEY-----
+                       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz4hMWjr8/lbRQk2uMcRR
+                       5INxTodPVE6fdONxrrR0lgcr3MquE9pjTkQguGM2c4yMjE7gi1Eb9hrWZIOn+LM/
+                       Ml5t6tR/W0jNYnhYsbElRQdUJODYld7ecSeT30wGH9ys075vKC9O4tqZFQTvxI7+
+                       MVNjtjo/H2EBMmj/P7LmWJq5QIqTerXq9xbpUHmsRluPfi7FDjgweFrYuEXTislJ
+                       D74B2q3IvOn3dSIE6LELmkqHv5b3V2syAgza2RJSEHOgODwtfFBlZOYbFqV/VRlf
+                       jeVb5uW22/vNY/isROEI8Pb3WOceuKwtvOK9wdcVnwYqiKUbfL35ckqBdod6Shlp
+                       4wIDAQAB
+                       -----END PUBLIC KEY-----
               vm_config:
                 allow_precompiled: true
                 code:
